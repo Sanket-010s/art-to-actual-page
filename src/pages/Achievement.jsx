@@ -10,12 +10,13 @@ const achievements = [
 
 const Achievement = () => {
   return (
-    <section className="min-h-screen pt-20">
+    <section id="achievement" className="min-h-screen pt-20">
       <div className="container mx-auto px-8 py-16">
         <motion.h2
           className="font-display text-3xl font-bold uppercase text-foreground mb-12"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           Achievements
@@ -24,9 +25,10 @@ const Achievement = () => {
           {achievements.map((item, i) => (
             <motion.div
               key={item.title}
-              className="flex gap-4 items-start rounded-xl border border-border bg-card p-6"
+              className="flex gap-4 items-start rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
             >
               <item.icon className="w-8 h-8 text-primary shrink-0 mt-1" />
