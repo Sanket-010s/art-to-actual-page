@@ -12,13 +12,13 @@ const Home = () => {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <p className="text-muted-foreground text-lg mb-2 font-body">Hello, I'm</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground">
-            Jason
+            Sanket
           </h1>
           <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight text-foreground">
-            Martin
+            Sutar
           </h1>
           <p className="text-primary text-lg mt-2 font-body tracking-widest">
-            Graphic Designer
+            Frontend Developer
           </p>
 
           <div className="flex gap-4 mt-8">
