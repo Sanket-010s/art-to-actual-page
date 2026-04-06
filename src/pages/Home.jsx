@@ -1,49 +1,39 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const roles = ["Computer Science Engineer", "Frontend Developer", "Photographer", "Graphic Designer"];
 
 const Home = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
+    return (
+      <section className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0">
+          <img src={heroBg} alt="Creative workspace" className="w-full h-full object-cover" width={1920} height={1080}/>
+          <div className="absolute inset-0 bg-hero-overlay"/>
+        </div>
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
+        <div className="relative z-10 container mx-auto px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey! I'm</p>
+            <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground">
+              Jason
+            </h1>
+            <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight text-foreground">
+              Martin
+            </h1>
 
-  return (
-    <section id="home" className="min-h-screen flex items-center">
-      <div className="container mx-auto px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey! I'm</p>
-          <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground">
-            Jason
-          </h1>
-          <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight text-foreground">
-            Martin
-          </h1>
-
-          <div className="mt-6">
-            <div className="inline-block px-8 py-3 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl shadow-lg shadow-purple-500/10 min-w-[280px] text-center">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={roleIndex}
-                  className="text-foreground text-sm font-body tracking-wide inline-block"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
+            <div className="flex flex-wrap gap-3 mt-6">
+              {roles.map((role) => (
+                <span
+                  key={role}
+                  className="px-5 py-2 rounded-full border border-primary/40 bg-primary/10 text-primary text-sm font-body tracking-wide"
                 >
-                  {roles[roleIndex]}
-                </motion.span>
-              </AnimatePresence>
+                  {role}
+                </span>
+              ))}
             </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+          </motion.div>
+        </div>
+      </section>
+    );
 };
 export default Home;
