@@ -1,25 +1,57 @@
-import { Link, useLocation } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+
 const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/resume", label: "Resume" },
-    { path: "/portfolio", label: "Portfolio" },
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#achievement", label: "Achievement" },
+  { href: "#contact", label: "Contact" },
 ];
+
 const Navbar = () => {
-    const location = useLocation();
-    return (<nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="flex items-center gap-8">
-        {navLinks.map((link) => (<Link key={link.path} to={link.path} className={`text-sm font-body tracking-wide transition-colors hover:text-primary ${location.pathname === link.path
-                ? "text-nav-active"
-                : "text-muted-foreground"}`}>
+  const [active, setActive] = useState("#home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      for (const link of [...navLinks].reverse()) {
+        const el = document.querySelector(link.href);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActive(link.href);
+          break;
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    setActive(href);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-2 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+      <div className="flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            onClick={(e) => handleClick(e, link.href)}
+            className={`relative px-5 py-2 rounded-full text-xs font-body font-semibold tracking-wide transition-all duration-300 ${
+              active === link.href
+                ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(200_80%_50%/0.4)]"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/10"
+            }`}
+          >
             {link.label}
-          </Link>))}
+          </a>
+        ))}
       </div>
-      <a href="tel:+17785553820" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-        <Phone className="w-4 h-4"/>
-        778-555-3820
-      </a>
-    </nav>);
+    </nav>
+  );
 };
+
 export default Navbar;
