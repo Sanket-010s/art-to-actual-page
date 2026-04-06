@@ -23,15 +23,19 @@ const achievements = [
 const Home = () => {
   return (
     <div>
-      {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center pt-20">
-        <div className="relative z-10 container mx-auto px-8 grid md:grid-cols-2 gap-8 items-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+      {/* Hero Section - Full background image like reference */}
+      <section id="home" className="relative min-h-screen flex items-center">
+        <img src={heroBg} alt="Creative workspace" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+
+        <div className="relative z-10 container mx-auto px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-xl">
             <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey! I'm</p>
-            <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground">
+            <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground leading-none">
               Jason
             </h1>
-            <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight" style={{ background: "linear-gradient(135deg, hsl(260 70% 60%), hsl(200 80% 60%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight leading-none" style={{ background: "linear-gradient(135deg, hsl(260 70% 60%), hsl(200 80% 60%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Martin
             </h1>
             <p className="mt-6 text-muted-foreground text-sm font-body tracking-wide">
@@ -43,23 +47,12 @@ const Home = () => {
               ))}
             </p>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden md:block"
-          >
-            <img src={heroBg} alt="Creative workspace" className="w-full h-[80vh] object-cover rounded-2xl" width={1920} height={1080} />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-l from-transparent via-transparent to-background" />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen pt-20">
-        <div className="container mx-auto px-8 py-16">
+      <section id="about" className="py-24">
+        <div className="container mx-auto px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="section-title mb-2">About</h2>
             <a href="mailto:j.martin@uptowork.com" className="text-muted-foreground text-sm hover:text-primary transition-colors">
@@ -68,7 +61,7 @@ const Home = () => {
             </a>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 mt-12">
+          <div className="grid md:grid-cols-2 gap-10 mt-10">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
               <div className="glass-card p-8">
                 <p className="text-muted-foreground leading-relaxed font-body text-sm">
@@ -78,7 +71,7 @@ const Home = () => {
                   My greatest strength is business awareness, which enables me to
                   permanently streamline infrastructure and applications.
                 </p>
-                <div className="flex items-center gap-2 mt-8 text-muted-foreground text-sm">
+                <div className="flex items-center gap-2 mt-6 text-muted-foreground text-sm">
                   <MapPin className="w-4 h-4 text-primary" />
                   <span>Florida, Orlando</span>
                 </div>
@@ -94,12 +87,12 @@ const Home = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen pt-20">
-        <div className="container mx-auto px-8 py-16">
-          <motion.h2 className="section-title mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+      <section id="skills" className="py-24">
+        <div className="container mx-auto px-8">
+          <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Skills
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {skills.map((group, i) => (
               <motion.div key={group.category} className="glass-card p-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
                 <h3 className="font-display text-lg font-bold uppercase text-primary mb-4">{group.category}</h3>
@@ -115,12 +108,12 @@ const Home = () => {
       </section>
 
       {/* Achievement Section */}
-      <section id="achievement" className="min-h-screen pt-20">
-        <div className="container mx-auto px-8 py-16">
-          <motion.h2 className="section-title mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+      <section id="achievement" className="py-24">
+        <div className="container mx-auto px-8">
+          <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Achievements
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {achievements.map((item, i) => (
               <motion.div key={item.title} className="glass-card flex gap-4 items-start p-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.12 }}>
                 <item.icon className="w-8 h-8 text-primary shrink-0 mt-1" />
@@ -135,15 +128,15 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen pt-20">
-        <div className="container mx-auto px-8 py-16">
-          <motion.h2 className="section-title mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+      <section id="contact" className="py-24">
+        <div className="container mx-auto px-8">
+          <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Contact
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-8">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
               <div className="glass-card p-8">
-                <p className="text-muted-foreground font-body text-sm leading-relaxed mb-8">
+                <p className="text-muted-foreground font-body text-sm leading-relaxed mb-6">
                   Feel free to reach out for collaborations, freelance work, or just a friendly chat. I'm always open to new opportunities and ideas.
                 </p>
                 <div className="space-y-4">
