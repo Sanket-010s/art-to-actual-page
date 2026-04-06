@@ -5,27 +5,24 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Achievement from "./pages/Achievement";
-import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
+
 const queryClient = new QueryClient();
-const App = () => (<QueryClientProvider client={queryClient}>
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/about" element={<About />}/>
-          <Route path="/skills" element={<Skills />}/>
-          <Route path="/achievement" element={<Achievement />}/>
-          <Route path="/resume" element={<Resume />}/>
-          <Route path="*" element={<NotFound />}/>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </QueryClientProvider>);
+  </QueryClientProvider>
+);
+
 export default App;
