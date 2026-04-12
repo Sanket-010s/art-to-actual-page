@@ -1,10 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion } from "framer-motion";
 
 const Carousel3D = ({ items, renderCard }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const total = items.length;
+  const containerRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
 
   const next = useCallback(() => setActiveIndex((i) => (i + 1) % total), [total]);
   const prev = useCallback(() => setActiveIndex((i) => (i - 1 + total) % total), [total]);
@@ -15,6 +17,51 @@ const Carousel3D = ({ items, renderCard }) => {
     return () => clearInterval(timer);
   }, [next]);
 
+  // Mouse/touch drag to scroll
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const onDown = (e) => {
+      isDragging.current = true;
+      startX.current = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    };
+    const onUp = (e) => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      const endX = e.clientX ?? e.changedTouches?.[0]?.clientX ?? 0;
+      const diff = endX - startX.current;
+      if (Math.abs(diff) > 50) {
+        diff > 0 ? prev() : next();
+      }
+    };
+    const onLeave = () => { isDragging.current = false; };
+
+    // Mouse wheel horizontal scroll
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 30) {
+        e.preventDefault();
+        e.deltaX > 0 ? next() : prev();
+      }
+    };
+
+    el.addEventListener("mousedown", onDown);
+    el.addEventListener("mouseup", onUp);
+    el.addEventListener("mouseleave", onLeave);
+    el.addEventListener("touchstart", onDown, { passive: true });
+    el.addEventListener("touchend", onUp);
+    el.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => {
+      el.removeEventListener("mousedown", onDown);
+      el.removeEventListener("mouseup", onUp);
+      el.removeEventListener("mouseleave", onLeave);
+      el.removeEventListener("touchstart", onDown);
+      el.removeEventListener("touchend", onUp);
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [next, prev]);
+
   const getPosition = (index) => {
     let diff = index - activeIndex;
     if (diff > total / 2) diff -= total;
@@ -23,23 +70,14 @@ const Carousel3D = ({ items, renderCard }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      {/* Spotlight effect */}
-      <div
-        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] h-[400px] pointer-events-none z-0"
-        style={{
-          background: "radial-gradient(ellipse at 50% 0%, hsl(260 70% 60% / 0.25) 0%, hsl(260 70% 60% / 0.08) 40%, transparent 70%)",
-        }}
-      />
-
+    <div className="relative flex flex-col items-center select-none" ref={containerRef}>
       {/* Cards container */}
-      <div className="relative w-full h-[420px] flex items-center justify-center perspective-[1200px]">
+      <div className="relative w-full h-[420px] flex items-center justify-center perspective-[1200px]" style={{ cursor: "grab" }}>
         {items.map((item, index) => {
           const pos = getPosition(index);
           const isActive = pos === 0;
           const absPos = Math.abs(pos);
 
-          // Calculate 3D transforms
           const translateX = pos * 280;
           const translateZ = isActive ? 0 : -150 * absPos;
           const scale = isActive ? 1.1 : Math.max(0.7, 1 - absPos * 0.15);
@@ -51,24 +89,13 @@ const Carousel3D = ({ items, renderCard }) => {
             <motion.div
               key={index}
               className="absolute"
-              animate={{
-                x: translateX,
-                z: translateZ,
-                scale,
-                opacity,
-                rotateY,
-              }}
+              animate={{ x: translateX, z: translateZ, scale, opacity, rotateY }}
               transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-              style={{
-                zIndex,
-                transformStyle: "preserve-3d",
-              }}
+              style={{ zIndex, transformStyle: "preserve-3d" }}
               onClick={() => setActiveIndex(index)}
             >
               <div
-                className={`w-[280px] rounded-2xl p-6 relative overflow-hidden cursor-pointer transition-shadow duration-500 ${
-                  isActive ? "shadow-[0_0_60px_hsl(260_70%_60%/0.3)]" : ""
-                }`}
+                className={`w-[280px] rounded-2xl p-6 relative overflow-hidden cursor-pointer transition-shadow duration-500`}
                 style={{
                   background: isActive
                     ? "linear-gradient(160deg, hsl(225 20% 14% / 0.95), hsl(225 20% 8% / 0.9))"
@@ -79,6 +106,15 @@ const Carousel3D = ({ items, renderCard }) => {
                     : "1px solid hsl(260 30% 25% / 0.3)",
                 }}
               >
+                {/* Spotlight effect on active card */}
+                {isActive && (
+                  <div
+                    className="absolute -top-10 left-1/2 -translate-x-1/2 w-[200px] h-[120px] pointer-events-none z-0"
+                    style={{
+                      background: "radial-gradient(ellipse at 50% 0%, hsl(260 70% 60% / 0.35) 0%, hsl(260 70% 60% / 0.1) 50%, transparent 80%)",
+                    }}
+                  />
+                )}
                 {/* Gradient border glow for active */}
                 {isActive && (
                   <div
@@ -92,38 +128,11 @@ const Carousel3D = ({ items, renderCard }) => {
                     }}
                   />
                 )}
-                {renderCard(item, isActive)}
+                <div className="relative z-10">{renderCard(item, isActive)}</div>
               </div>
             </motion.div>
           );
         })}
-      </div>
-
-      {/* Navigation */}
-      <div className="flex items-center gap-4 mt-6 z-10">
-        <button
-          onClick={prev}
-          className="w-10 h-10 rounded-full bg-primary/10 backdrop-blur-md border border-primary/20 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <div className="flex gap-2">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === activeIndex ? "bg-primary w-6" : "bg-muted-foreground/30"
-              }`}
-            />
-          ))}
-        </div>
-        <button
-          onClick={next}
-          className="w-10 h-10 rounded-full bg-primary/10 backdrop-blur-md border border-primary/20 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
       </div>
     </div>
   );
