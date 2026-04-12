@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Mail } from "lucide-react";
 import { Award, Star, Trophy } from "lucide-react";
-import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Carousel3D from "@/components/Carousel3D";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const roles = ["Computer Science Engineer", "Frontend Developer", "Photographer", "Graphic Designer"];
@@ -20,26 +19,6 @@ const achievements = [
   { icon: Star, title: "Top Creative Director", description: "Named Top Creative Director by the Regional Advertising Association." },
   { icon: Award, title: "Client Satisfaction", description: "Maintained a 98% client satisfaction rate across 50+ branding projects." },
 ];
-
-const ScrollRow = ({ children }) => {
-  const ref = useRef(null);
-  const scroll = (dir) => {
-    if (ref.current) ref.current.scrollBy({ left: dir * 320, behavior: "smooth" });
-  };
-  return (
-    <div className="relative group">
-      <button onClick={() => scroll(-1)} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -ml-4">
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <div ref={ref} className="flex gap-5 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-        {children}
-      </div>
-      <button onClick={() => scroll(1)} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -mr-4">
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </div>
-  );
-};
 
 const Home = () => {
   return (
@@ -106,36 +85,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Skills Section - Horizontal scroll cards */}
-      <section id="skills" className="py-24">
+      {/* Skills Section - 3D Carousel */}
+      <section id="skills" className="py-24 overflow-hidden">
         <div className="container mx-auto px-8">
-          <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <motion.h2 className="section-title mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Skills
           </motion.h2>
-          <ScrollRow>
-            {skills.map((group, i) => (
-              <motion.div
-                key={group.category}
-                className="min-w-[280px] max-w-[300px] snap-start shrink-0 rounded-2xl p-6 relative overflow-hidden"
-                style={{
-                  background: "linear-gradient(160deg, hsl(225 20% 12% / 0.9), hsl(225 20% 6% / 0.7))",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid hsl(260 30% 25% / 0.4)",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              >
-                {/* Gradient border glow */}
-                <div className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none" style={{
-                  background: "linear-gradient(135deg, hsl(260 70% 60% / 0.5), hsl(200 80% 50% / 0.15), hsl(260 70% 60% / 0.3))",
-                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  maskComposite: "exclude",
-                  WebkitMaskComposite: "xor",
-                }} />
+          <Carousel3D
+            items={skills}
+            renderCard={(group) => (
+              <>
                 <div className="text-3xl mb-3">{group.icon}</div>
                 <h3 className="font-display text-lg font-bold uppercase text-primary mb-1">{group.category}</h3>
                 <p className="text-muted-foreground/60 text-xs mb-4 font-body">Core proficiency area</p>
@@ -147,47 +106,28 @@ const Home = () => {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            ))}
-          </ScrollRow>
+              </>
+            )}
+          />
         </div>
       </section>
 
-      {/* Achievement Section - Horizontal scroll cards */}
-      <section id="achievement" className="py-24">
+      {/* Achievement Section - 3D Carousel */}
+      <section id="achievement" className="py-24 overflow-hidden">
         <div className="container mx-auto px-8">
-          <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <motion.h2 className="section-title mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Achievements
           </motion.h2>
-          <ScrollRow>
-            {achievements.map((item, i) => (
-              <motion.div
-                key={item.title}
-                className="min-w-[280px] max-w-[300px] snap-start shrink-0 rounded-2xl p-6 relative overflow-hidden"
-                style={{
-                  background: "linear-gradient(160deg, hsl(225 20% 12% / 0.9), hsl(225 20% 6% / 0.7))",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid hsl(260 30% 25% / 0.4)",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              >
-                <div className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none" style={{
-                  background: "linear-gradient(135deg, hsl(260 70% 60% / 0.5), hsl(200 80% 50% / 0.15), hsl(260 70% 60% / 0.3))",
-                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  maskComposite: "exclude",
-                  WebkitMaskComposite: "xor",
-                }} />
+          <Carousel3D
+            items={achievements}
+            renderCard={(item) => (
+              <>
                 <item.icon className="w-10 h-10 text-primary mb-3" />
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.title}</h3>
                 <p className="text-muted-foreground text-sm font-body leading-relaxed">{item.description}</p>
-              </motion.div>
-            ))}
-          </ScrollRow>
+              </>
+            )}
+          />
         </div>
       </section>
 
