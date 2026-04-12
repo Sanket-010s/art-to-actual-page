@@ -30,12 +30,12 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
         <div className="relative z-10 container mx-auto px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-xl">
-            <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey! I'm</p>
+            <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey ! I'm</p>
             <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight text-foreground leading-none">
-              Jason
+              Sutar
             </h1>
             <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight leading-none" style={{ background: "linear-gradient(135deg, hsl(260 70% 60%), hsl(200 80% 60%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              Martin
+              Sanket
             </h1>
             <p className="mt-6 text-muted-foreground text-sm font-body tracking-wide">
               {roles.map((role, i) => (
@@ -50,43 +50,48 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24">
+      <section id="about" className="min-h-screen py-24">
         <div className="container mx-auto px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="section-title mb-2">About</h2>
-            <a href="mailto:j.martin@uptowork.com" className="text-muted-foreground text-sm hover:text-primary transition-colors">
-              <Mail className="inline w-4 h-4 mr-1" />
-              j.martin@uptowork.com
+            <a href="mailto:jsanketsutar010@gmail.com" className="text-muted-foreground text-sm hover:text-primary transition-colors mt-">
+              <Mail className="inline w-4 h-4 mr-1 " />
+              sanketsutar010@gmail.com
             </a>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-10 mt-10">
+          <div className="flex  gap-5  mt-10 ">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <div className="glass-card p-8">
-                <p className="text-muted-foreground leading-relaxed font-body text-sm">
-                  Graphic Designer with over 10 years of experience specializing in
-                  IT Department management for international logistics companies. I
-                  can implement effective IT Strategies at local and global levels.
-                  My greatest strength is business awareness, which enables me to
-                  permanently streamline infrastructure and applications.
+              {/* <div className="glass-card p-8"> */}
+                <p className="text-muted-foreground leading-relaxed font-body text-sm mt-20 w-100">
+                  I’m a passionate Frontend Developer with a strong interest in building responsive, user-friendly, and visually appealing web applications. I enjoy turning ideas into interactive digital experiences using modern web technologies.
+
+
+                  Beyond frontend development, I’m actively exploring Full Stack Development, Machine Learning, and Software Development to broaden my skill set and create more impactful solutions.
+                              
+
+                  I also have a creative side—I work as a Graphic Designer and Photographer, which helps me bring a unique blend of design thinking and technical skills into every project I build.
+
+
+                  I’m always eager to learn, experiment, and take on new challenges that push my boundaries and help me grow as a developer and creator.
                 </p>
                 <div className="flex items-center gap-2 mt-6 text-muted-foreground text-sm">
                   <MapPin className="w-4 h-4 text-primary" />
-                  <span>Florida, Orlando</span>
+                  <span>Khubi, Karad</span>
                 </div>
-                <p className="text-muted-foreground text-xs ml-6">12529 State Road 535</p>
-              </div>
+                <p className="text-muted-foreground text-xs ml-6">Maharashtra 415-108</p>
+              {/* </div> */}
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex justify-center">
-              <img src={profileImg} alt="Jason Martin" className="w-full max-w-sm object-cover rounded-2xl" loading="lazy" width={800} height={1000} />
+              <img src="" alt="Jason Martin" className="w-100 max-w-sm object-cover rounded-2xl" loading="lazy" width={800} height={1000} />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-24">
+      <section id="skills" className="min-h-screen py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Skills
@@ -107,7 +112,7 @@ const Home = () => {
       </section>
 
       {/* Achievement Section */}
-      <section id="achievement" className="py-24">
+      <section id="achievement" className="min-h-screen py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Achievements
@@ -127,7 +132,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24">
+      <section id="contact" className="min-h-screen py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Contact
