@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Mail } from "lucide-react";
 import { Award, Star, Trophy } from "lucide-react";
-import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Carousel3D from "@/components/Carousel3D";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const roles = ["Computer Science Engineer", "Frontend Developer", "Photographer", "Graphic Designer"];
