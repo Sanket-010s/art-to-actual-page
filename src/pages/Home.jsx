@@ -20,25 +20,6 @@ const achievements = [
   { icon: Award, title: "Client Satisfaction", description: "Maintained a 98% client satisfaction rate across 50+ branding projects." },
 ];
 
-const ScrollRow = ({ children }) => {
-  const ref = useRef(null);
-  const scroll = (dir) => {
-    if (ref.current) ref.current.scrollBy({ left: dir * 320, behavior: "smooth" });
-  };
-  return (
-    <div className="relative group">
-      <button onClick={() => scroll(-1)} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -ml-4">
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <div ref={ref} className="flex gap-5 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-        {children}
-      </div>
-      <button onClick={() => scroll(1)} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -mr-4">
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </div>
-  );
-};
 
 const Home = () => {
   return (
