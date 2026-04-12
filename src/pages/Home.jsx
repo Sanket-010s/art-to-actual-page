@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
 import { MapPin, Mail } from "lucide-react";
 import { Award, Star, Trophy } from "lucide-react";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-import profileImg from "@/assets/profile.jpg";
 
 const roles = ["Computer Science Engineer", "Frontend Developer", "Photographer", "Graphic Designer"];
 
 const skills = [
-  { category: "Design", items: ["Photoshop", "Illustrator", "InDesign", "Figma", "Sketch"] },
-  { category: "Motion", items: ["After Effects", "Premiere Pro", "Cinema 4D"] },
-  { category: "Web", items: ["HTML/CSS", "JavaScript", "React", "Tailwind CSS"] },
-  { category: "Branding", items: ["Logo Design", "Brand Identity", "Typography", "Packaging"] },
+  { category: "Design", items: ["Photoshop", "Illustrator", "InDesign", "Figma", "Sketch"], icon: "🎨" },
+  { category: "Motion", items: ["After Effects", "Premiere Pro", "Cinema 4D"], icon: "🎬" },
+  { category: "Web", items: ["HTML/CSS", "JavaScript", "React", "Tailwind CSS"], icon: "💻" },
+  { category: "Branding", items: ["Logo Design", "Brand Identity", "Typography", "Packaging"], icon: "✦" },
 ];
 
 const achievements = [
@@ -20,10 +21,30 @@ const achievements = [
   { icon: Award, title: "Client Satisfaction", description: "Maintained a 98% client satisfaction rate across 50+ branding projects." },
 ];
 
+const ScrollRow = ({ children }) => {
+  const ref = useRef(null);
+  const scroll = (dir) => {
+    if (ref.current) ref.current.scrollBy({ left: dir * 320, behavior: "smooth" });
+  };
+  return (
+    <div className="relative group">
+      <button onClick={() => scroll(-1)} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -ml-4">
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <div ref={ref} className="flex gap-5 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        {children}
+      </div>
+      <button onClick={() => scroll(1)} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -mr-4">
+        <ChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+  );
+};
+
 const Home = () => {
   return (
-    <div>
-      {/* Hero Section - Full background image like reference */}
+    <div className="overflow-x-hidden">
+      {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center">
         <img src={heroBg} alt="Creative workspace" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
@@ -50,89 +71,128 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen py-24">
+      <section id="about" className="py-24">
         <div className="container mx-auto px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="section-title mb-2">About</h2>
-            <a href="mailto:jsanketsutar010@gmail.com" className="text-muted-foreground text-sm hover:text-primary transition-colors mt-">
-              <Mail className="inline w-4 h-4 mr-1 " />
+            <a href="mailto:sanketsutar010@gmail.com" className="text-muted-foreground text-sm hover:text-primary transition-colors">
+              <Mail className="inline w-4 h-4 mr-1" />
               sanketsutar010@gmail.com
             </a>
           </motion.div>
 
-          <div className="flex  gap-5  mt-10 ">
+          <div className="flex gap-5 mt-10">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
-              {/* <div className="glass-card p-8"> */}
-                <p className="text-muted-foreground leading-relaxed font-body text-sm mt-20 w-100">
-                  I’m a passionate Frontend Developer with a strong interest in building responsive, user-friendly, and visually appealing web applications. I enjoy turning ideas into interactive digital experiences using modern web technologies.
+              <p className="text-muted-foreground leading-relaxed font-body text-sm mt-20 max-w-lg">
+                I'm a passionate Frontend Developer with a strong interest in building responsive, user-friendly, and visually appealing web applications. I enjoy turning ideas into interactive digital experiences using modern web technologies.
 
+                Beyond frontend development, I'm actively exploring Full Stack Development, Machine Learning, and Software Development to broaden my skill set and create more impactful solutions.
 
-                  Beyond frontend development, I’m actively exploring Full Stack Development, Machine Learning, and Software Development to broaden my skill set and create more impactful solutions.
-                              
+                I also have a creative side—I work as a Graphic Designer and Photographer, which helps me bring a unique blend of design thinking and technical skills into every project I build.
 
-                  I also have a creative side—I work as a Graphic Designer and Photographer, which helps me bring a unique blend of design thinking and technical skills into every project I build.
-
-
-                  I’m always eager to learn, experiment, and take on new challenges that push my boundaries and help me grow as a developer and creator.
-                </p>
-                <div className="flex items-center gap-2 mt-6 text-muted-foreground text-sm">
-                  <MapPin className="w-4 h-4 text-primary" />
-                  <span>Khubi, Karad</span>
-                </div>
-                <p className="text-muted-foreground text-xs ml-6">Maharashtra 415-108</p>
-              {/* </div> */}
+                I'm always eager to learn, experiment, and take on new challenges that push my boundaries and help me grow as a developer and creator.
+              </p>
+              <div className="flex items-center gap-2 mt-6 text-muted-foreground text-sm">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span>Khubi, Karad</span>
+              </div>
+              <p className="text-muted-foreground text-xs ml-6">Maharashtra 415-108</p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex justify-center">
-              <img src="" alt="Jason Martin" className="w-100 max-w-sm object-cover rounded-2xl" loading="lazy" width={800} height={1000} />
+              <img src="" alt="Profile" className="w-100 max-w-sm object-cover rounded-2xl" loading="lazy" width={800} height={1000} />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="min-h-screen py-24">
+      {/* Skills Section - Horizontal scroll cards */}
+      <section id="skills" className="py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Skills
           </motion.h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <ScrollRow>
             {skills.map((group, i) => (
-              <motion.div key={group.category} className="glass-card p-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
-                <h3 className="font-display text-lg font-bold uppercase text-primary mb-4">{group.category}</h3>
+              <motion.div
+                key={group.category}
+                className="min-w-[280px] max-w-[300px] snap-start shrink-0 rounded-2xl p-6 relative overflow-hidden"
+                style={{
+                  background: "linear-gradient(160deg, hsl(225 20% 12% / 0.9), hsl(225 20% 6% / 0.7))",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid hsl(260 30% 25% / 0.4)",
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              >
+                {/* Gradient border glow */}
+                <div className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none" style={{
+                  background: "linear-gradient(135deg, hsl(260 70% 60% / 0.5), hsl(200 80% 50% / 0.15), hsl(260 70% 60% / 0.3))",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude",
+                  WebkitMaskComposite: "xor",
+                }} />
+                <div className="text-3xl mb-3">{group.icon}</div>
+                <h3 className="font-display text-lg font-bold uppercase text-primary mb-1">{group.category}</h3>
+                <p className="text-muted-foreground/60 text-xs mb-4 font-body">Core proficiency area</p>
                 <ul className="space-y-2">
                   {group.items.map((item) => (
-                    <li key={item} className="text-muted-foreground text-sm font-body">{item}</li>
+                    <li key={item} className="text-muted-foreground text-sm font-body flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </motion.div>
             ))}
-          </div>
+          </ScrollRow>
         </div>
       </section>
 
-      {/* Achievement Section */}
-      <section id="achievement" className="min-h-screen py-24">
+      {/* Achievement Section - Horizontal scroll cards */}
+      <section id="achievement" className="py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Achievements
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-5">
+          <ScrollRow>
             {achievements.map((item, i) => (
-              <motion.div key={item.title} className="glass-card flex gap-4 items-start p-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.12 }}>
-                <item.icon className="w-8 h-8 text-primary shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-display text-lg font-bold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm font-body">{item.description}</p>
-                </div>
+              <motion.div
+                key={item.title}
+                className="min-w-[280px] max-w-[300px] snap-start shrink-0 rounded-2xl p-6 relative overflow-hidden"
+                style={{
+                  background: "linear-gradient(160deg, hsl(225 20% 12% / 0.9), hsl(225 20% 6% / 0.7))",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid hsl(260 30% 25% / 0.4)",
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              >
+                <div className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none" style={{
+                  background: "linear-gradient(135deg, hsl(260 70% 60% / 0.5), hsl(200 80% 50% / 0.15), hsl(260 70% 60% / 0.3))",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude",
+                  WebkitMaskComposite: "xor",
+                }} />
+                <item.icon className="w-10 h-10 text-primary mb-3" />
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm font-body leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
-          </div>
+          </ScrollRow>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen py-24">
+      <section id="contact" className="py-24">
         <div className="container mx-auto px-8">
           <motion.h2 className="section-title mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             Contact
@@ -146,11 +206,11 @@ const Home = () => {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-muted-foreground text-sm">
                     <Mail className="w-5 h-5 text-primary" />
-                    <a href="mailto:j.martin@uptowork.com" className="hover:text-primary transition-colors">j.martin@uptowork.com</a>
+                    <a href="mailto:sanketsutar010@gmail.com" className="hover:text-primary transition-colors">sanketsutar010@gmail.com</a>
                   </div>
                   <div className="flex items-center gap-3 text-muted-foreground text-sm">
                     <MapPin className="w-5 h-5 text-primary" />
-                    <span>Florida, Orlando – 12529 State Road 535</span>
+                    <span>Khubi, Karad, Maharashtra</span>
                   </div>
                 </div>
               </div>
