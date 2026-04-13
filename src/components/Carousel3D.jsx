@@ -11,13 +11,11 @@ const Carousel3D = ({ items, renderCard }) => {
   const next = useCallback(() => setActiveIndex((i) => (i + 1) % total), [total]);
   const prev = useCallback(() => setActiveIndex((i) => (i - 1 + total) % total), [total]);
 
-  // Auto-rotate
   useEffect(() => {
     const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
   }, [next]);
 
-  // Mouse/touch drag to scroll
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -36,8 +34,6 @@ const Carousel3D = ({ items, renderCard }) => {
       }
     };
     const onLeave = () => { isDragging.current = false; };
-
-    // Mouse wheel horizontal scroll
     const onWheel = (e) => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 30) {
         e.preventDefault();
@@ -71,7 +67,6 @@ const Carousel3D = ({ items, renderCard }) => {
 
   return (
     <div className="relative flex flex-col items-center select-none" ref={containerRef}>
-      {/* Cards container */}
       <div className="relative w-full h-[500px] flex items-center justify-center perspective-[1200px]" style={{ cursor: "grab" }}>
         {items.map((item, index) => {
           const pos = getPosition(index);
@@ -91,40 +86,41 @@ const Carousel3D = ({ items, renderCard }) => {
               className="absolute"
               animate={{ x: translateX, z: translateZ, scale, opacity, rotateY }}
               transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-              style={{ 
-                zIndex, 
+              style={{
+                zIndex,
                 transformStyle: "preserve-3d",
                 pointerEvents: absPos > 1 ? "none" : "auto"
               }}
               onClick={() => setActiveIndex(index)}
             >
               <div
-                className={`w-[280px] min-h-[400px] rounded-3xl p-8 relative overflow-hidden cursor-pointer transition-shadow duration-500 flex flex-col`}
+                className="w-[280px] min-h-[400px] rounded-3xl p-8 relative overflow-hidden cursor-pointer transition-shadow duration-500 flex flex-col"
                 style={{
                   background: isActive
-                    ? "linear-gradient(160deg, hsl(225 20% 14% / 0.95), hsl(225 20% 8% / 0.9))"
-                    : "linear-gradient(160deg, hsl(225 20% 12% / 0.8), hsl(225 20% 6% / 0.6))",
+                    ? "linear-gradient(160deg, hsl(0 0% 100% / 0.95), hsl(220 20% 97% / 0.9))"
+                    : "linear-gradient(160deg, hsl(0 0% 100% / 0.7), hsl(220 20% 98% / 0.5))",
                   backdropFilter: "blur(20px)",
                   border: isActive
-                    ? "1px solid hsl(260 50% 40% / 0.6)"
-                    : "1px solid hsl(260 30% 25% / 0.3)",
+                    ? "1px solid hsl(260 50% 70% / 0.5)"
+                    : "1px solid hsl(220 15% 88% / 0.5)",
+                  boxShadow: isActive
+                    ? "0 8px 32px hsl(260 40% 50% / 0.15)"
+                    : "0 4px 16px hsl(220 20% 50% / 0.08)",
                 }}
               >
-                {/* Spotlight effect on active card */}
                 {isActive && (
                   <div
                     className="absolute -top-10 left-1/2 -translate-x-1/2 w-[200px] h-[120px] pointer-events-none z-0"
                     style={{
-                      background: "radial-gradient(ellipse at 50% 0%, hsl(260 70% 60% / 0.35) 0%, hsl(260 70% 60% / 0.1) 50%, transparent 80%)",
+                      background: "radial-gradient(ellipse at 50% 0%, hsl(260 70% 55% / 0.25) 0%, hsl(260 70% 55% / 0.08) 50%, transparent 80%)",
                     }}
                   />
                 )}
-                {/* Gradient border glow for active */}
                 {isActive && (
                   <div
-                    className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none"
+                    className="absolute inset-0 rounded-3xl p-[1px] pointer-events-none"
                     style={{
-                      background: "linear-gradient(135deg, hsl(260 70% 60% / 0.6), hsl(200 80% 50% / 0.2), hsl(260 70% 60% / 0.4))",
+                      background: "linear-gradient(135deg, hsl(260 70% 55% / 0.5), hsl(200 80% 60% / 0.2), hsl(260 70% 55% / 0.3))",
                       mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                       WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                       maskComposite: "exclude",
