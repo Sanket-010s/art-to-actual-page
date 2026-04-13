@@ -92,7 +92,7 @@ const Home = () => {
               <input type="text" placeholder="Your Name" className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm font-body focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground/60" />
               <input type="email" placeholder="Your Email" className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm font-body focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground/60" />
               <textarea placeholder="Your Message" rows={5} className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm font-body focus:outline-none focus:ring-1 focus:ring-primary resize-none placeholder:text-muted-foreground/60" />
-              <button type="submit" className="px-8 py-3 rounded-xl bg-primary text-primary-foreground font-body font-semibold text-sm hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(260_70%_55%/0.2)]">
+              <button type="submit" className="px-8 py-3 rounded-xl bg-primary text-primary-foreground font-body font-semibold text-sm hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(200_80%_40%/0.2)]">
                 Send Message
               </button>
             </motion.form>
