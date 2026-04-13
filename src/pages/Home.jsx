@@ -19,7 +19,7 @@ const Home = () => {
           <div className="flex items-center justify-between">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-xl">
               <p className="text-muted-foreground text-lg mb-2 font-body font-semibold">Hey ! I'm</p>
-              <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight leading-none" style={{ background: "linear-gradient(135deg, hsl(260 70% 45%), hsl(200 80% 50%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tight leading-none" style={{ background: "linear-gradient(135deg, hsl(200 80% 35%), hsl(190 60% 50%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 SANKET SUTAR
               </h1>
               <div className="mt-6 text-muted-foreground text-base font-body tracking-wide space-y-1">
@@ -46,11 +46,12 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="hidden md:block"
+              className="hidden md:flex items-center justify-center flex-shrink-0"
             >
-              <div className="relative">
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-accent/10 blur-2xl" />
-                <img src={profileImg} alt="Sanket Sutar" className="relative w-72 lg:w-80 object-cover drop-shadow-2xl" />
+              <div className="relative w-72 lg:w-96">
+                <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-primary/25 via-accent/15 to-transparent blur-3xl" />
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-primary/10 to-accent/10 blur-xl" />
+                <img src={profileImg} alt="Sanket Sutar" className="relative w-full object-contain drop-shadow-[0_20px_40px_hsl(200_60%_30%/0.3)]" />
               </div>
             </motion.div>
           </div>

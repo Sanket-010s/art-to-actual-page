@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-2 py-2 rounded-full border border-border/50 bg-background/60 backdrop-blur-xl shadow-[0_8px_32px_hsl(260_30%_50%/0.1)]">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-2 py-2 rounded-full border border-border/50 bg-background/60 backdrop-blur-xl shadow-[0_8px_32px_hsl(200_40%_40%/0.12)]">
       <div className="flex items-center gap-1">
         {navLinks.map((link) => (
           <a
@@ -43,7 +43,7 @@ const Navbar = () => {
             onClick={(e) => handleClick(e, link.href)}
             className={`relative px-5 py-2 rounded-full text-xs font-body font-semibold tracking-wide transition-all duration-300 ${
               active === link.href
-                ? "bg-primary text-primary-foreground shadow-[0_0_16px_hsl(260_70%_55%/0.3)]"
+                ? "bg-primary text-primary-foreground shadow-[0_0_16px_hsl(200_80%_40%/0.3)]"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
             }`}
           >
