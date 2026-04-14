@@ -19,10 +19,10 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 overflow-hidden">
-      <div className="container mx-auto px-8">
+    <section id="skills" className="py-32 page-padding overflow-hidden">
+      <div className="container mx-auto px-10">
         <motion.h2
-          className="section-title mb-16 text-center"
+          className="section-title mb-20 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -34,20 +34,20 @@ const Skills = () => {
           items={skills}
           renderCard={(group) => (
             <>
-              <div className="text-3xl mb-3">{group.icon}</div>
-              <h3 className="font-display text-lg font-bold uppercase text-primary mb-1">
+              <div className="text-3xl mb-4">{group.icon}</div>
+              <h3 className="font-display text-xl font-bold uppercase text-primary mb-2">
                 {group.category}
               </h3>
-              <p className="text-muted-foreground/60 text-xs mb-4 font-body">
+              <p className="text-muted-foreground/60 text-sm font-body mb-6">
                 Core proficiency area
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {group.items.map((item) => (
                   <li
                     key={item}
-                    className="text-muted-foreground text-sm font-body flex items-center gap-2"
+                    className="text-muted-foreground text-sm font-body flex items-center gap-3"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-primary/60 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -61,3 +61,4 @@ const Skills = () => {
 };
 
 export default Skills;
+

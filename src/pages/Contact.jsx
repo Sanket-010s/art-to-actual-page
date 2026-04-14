@@ -3,48 +3,43 @@ import { Mail, MapPin } from "lucide-react";
 
 const Contact = ({ id = "contact" }) => {
   return (
-    <section id={id} className="min-h-screen pt-20 scroll-mt-28">
-      <div className="container mx-auto px-8 py-16">
-        <motion.h2
-          className="font-display text-3xl font-bold uppercase text-foreground mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Contact
-        </motion.h2>
+    <section id="contact" className="py-32 page-padding">
+        <div className="container mx-auto px-10 lg:px-16">
+          <motion.h2 className="section-title mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            Contact
+          </motion.h2>
+          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
+              <div className="glass-card p-12">
+                <p className="text-muted-foreground font-body text-base leading-relaxed mb-8">
+                  Feel free to reach out for collaborations, freelance work, or just a friendly chat. I'm always open to new opportunities and ideas.
+                </p>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4 text-muted-foreground text-base">
+                    <Mail className="w-6 h-6 text-primary shrink-0" />
+                    <a href="mailto:sanketsutar010@gmail.com" className="hover:text-primary transition-colors font-medium">sanketsutar010@gmail.com</a>
+                  </div>
+                  <div className="flex items-center gap-4 text-muted-foreground text-base">
+                    <MapPin className="w-6 h-6 text-primary shrink-0" />
+                    <span className="font-medium">Khubi, Karad, Maharashtra</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
-        <motion.p
-          className="text-muted-foreground font-body text-sm leading-relaxed max-w-xl"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Want to collaborate or have a project in mind? Send a message and I’ll get back to you.
-        </motion.p>
-
-        <div className="mt-10 grid gap-4 max-w-xl">
-          <a
-            href="mailto:hello@example.com"
-            className="flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 text-sm font-body text-foreground hover:border-foreground/30 transition-colors"
-          >
-            <Mail className="w-4 h-4 text-primary" />
-            <span className="text-muted-foreground">hello@example.com</span>
-          </a>
-
-          <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 text-sm font-body text-foreground">
-            <MapPin className="w-4 h-4 text-primary" />
-            <div className="leading-tight">
-              <div className="text-muted-foreground">Khubi, Karad</div>
-              <div className="text-muted-foreground text-xs">Maharashtra 415-108</div>
-            </div>
+            <motion.form initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="glass-card p-12 space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <input type="text" placeholder="Your Name" className="w-full px-8 py-5 rounded-xl bg-muted/50 border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground/60 transition-all" />
+              <input type="email" placeholder="Your Email" className="w-full px-8 py-5 rounded-xl bg-muted/50 border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground/60 transition-all" />
+              <textarea placeholder="Your Message" rows={6} className="w-full px-8 py-5 rounded-xl bg-muted/50 border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none placeholder:text-muted-foreground/60 transition-all" />
+              <button type="submit" className="w-full px-12 py-5 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-display font-semibold text-lg hover:from-primary/90 hover:to-accent/90 transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02]">
+                Send Message
+              </button>
+            </motion.form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 };
 
 export default Contact;
+

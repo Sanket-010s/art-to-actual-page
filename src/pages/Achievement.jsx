@@ -13,8 +13,8 @@ const achievements = [
 
 const Achievement = () => {
   return (
-    <section id="achievement" className="py-24">
-      <div className="container mx-auto px-8">
+    <section id="achievement" className="py-32 page-padding">
+      <div className="container mx-auto px-10">
         <motion.h2
           className="section-title mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -24,7 +24,7 @@ const Achievement = () => {
         >
           Achievements
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {achievements.map((item, i) => (
             <motion.div
               key={i}
@@ -35,7 +35,7 @@ const Achievement = () => {
               whileHover={{ y: -4 }}
               className="glass-card overflow-hidden group"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -44,12 +44,12 @@ const Achievement = () => {
                   width={704}
                   height={512}
                 />
-                <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-body font-semibold">
+                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-primary/90 text-primary-foreground text-xs font-body font-semibold">
                   {item.date}
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
+              <div className="p-8">
+                <h3 className="font-display text-xl font-bold text-foreground mb-3">
                   {item.title}
                 </h3>
                 <p className="text-muted-foreground text-sm font-body leading-relaxed">
@@ -65,3 +65,4 @@ const Achievement = () => {
 };
 
 export default Achievement;
+

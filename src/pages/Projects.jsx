@@ -34,8 +34,8 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24">
-      <div className="container mx-auto px-8">
+    <section id="projects" className="py-32 page-padding">
+      <div className="container mx-auto px-10">
         <motion.h2
           className="section-title mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ const Projects = () => {
           Projects
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, i) => (
             <motion.div
               key={i}
@@ -55,7 +55,7 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -4 }}
-              className="glass-card p-6 group"
+              className="glass-card p-8 group"
             >
               <h3 className="font-display text-xl font-bold text-foreground mb-2">
                 {project.title}
@@ -65,7 +65,7 @@ const Projects = () => {
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((t) => (
-                  <span key={t} className="px-3 py-1 text-xs font-body font-medium rounded-full bg-primary/10 text-primary">
+                  <span key={t} className="px-4 py-2 text-xs font-body font-medium rounded-full bg-primary/10 text-primary">
                     {t}
                   </span>
                 ))}
@@ -87,3 +87,4 @@ const Projects = () => {
 };
 
 export default Projects;
+

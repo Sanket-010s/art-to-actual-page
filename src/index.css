@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -74,6 +74,10 @@
 }
 
 @layer utilities {
+  .page-padding {
+    @apply px-8 py-12 lg:px-16 lg:py-20;
+  }
+
   .text-nav-active {
     color: hsl(var(--nav-active));
   }
@@ -99,7 +103,7 @@
   }
 
   .glass-card {
-    @apply relative rounded-2xl overflow-hidden;
+    @apply relative rounded-2xl overflow-hidden p-2;
     background: linear-gradient(135deg, hsl(195 30% 95% / 0.8), hsl(200 30% 92% / 0.6));
     backdrop-filter: blur(20px);
     border: 1px solid transparent;

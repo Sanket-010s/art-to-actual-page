@@ -1,0 +1,1 @@
+# Task: Arrange image on home page properly and without frame&#10;&#10;## Steps:&#10;1. [x] Create TODO.md with plan breakdown&#10;2. [x] Edit src/pages/Home.jsx: Update profile image - remove shadows/frame effects, improve sizing/positioning, make visible on mobile.&#10;3. [x] Verify changes&#10;4. [x] Mark complete&#10;

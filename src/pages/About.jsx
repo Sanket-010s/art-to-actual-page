@@ -4,8 +4,8 @@ import profileImg from "@/assets/profile.png";
 
 const About = () => {
   return (
-    <section id="about" className="py-24">
-      <div className="container mx-auto px-8">
+    <section id="about" className="py-32 page-padding">
+      <div className="container mx-auto">
         <motion.h2
           className="section-title mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -36,15 +36,15 @@ const About = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-body font-semibold text-sm hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(260_70%_55%/0.2)]"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-body font-semibold text-sm hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(260_70%_55%/0.2)]"
             >
               <FileDown className="w-4 h-4" />
               View & Download Resume
             </a>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-              <div className="glass-card p-4 flex flex-row items-center gap-4">
-                <div className="bg-primary/10 p-3.5 rounded-[14px] text-primary">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+              <div className="glass-card p-6 flex flex-row items-center gap-6">
+                <div className="bg-primary/10 p-4 rounded-[14px] text-primary">
                   <Cake className="w-5 h-5" strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col text-left">
@@ -53,8 +53,8 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="glass-card p-4 flex flex-row items-center gap-4">
-                <div className="bg-primary/10 p-3.5 rounded-[14px] text-primary">
+              <div className="glass-card p-6 flex flex-row items-center gap-6">
+                <div className="bg-primary/10 p-4 rounded-[14px] text-primary">
                   <MapPin className="w-5 h-5" strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col text-left">
@@ -63,8 +63,8 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="glass-card p-4 flex flex-row items-center gap-4">
-                <div className="bg-primary/10 p-3.5 rounded-[14px] text-primary">
+              <div className="glass-card p-6 flex flex-row items-center gap-6">
+                <div className="bg-primary/10 p-4 rounded-[14px] text-primary">
                   <Languages className="w-5 h-5" strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col text-left">
@@ -81,3 +81,4 @@ const About = () => {
 };
 
 export default About;
+
